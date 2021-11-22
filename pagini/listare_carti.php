@@ -4,6 +4,11 @@
 
 <?php
 $carti = afisareCarte();
+
+if (count($carti) == 0) {
+    print "<h2> Nu sunt carti de afisat</h2>";
+    return;
+}
 //var_dump($carti); die();
 print '<table  class="table table-bordered table-hover" style="margin-bottom: 40px;">';
     print '<thead>';
