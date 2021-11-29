@@ -3,18 +3,23 @@
 <br>
 
 <form class="form-inline" method="get"> 
+    <input type="hidden" name="page" value="1"/>
     <input type="text" class="form-control mb-2 mr-sm-2" name="kw" placeholder="Cauta titlu..."/>
     <button type="submit" class="btn btn-secondary mb-2"  name="cauta" value="Cauta">Cauta</button>  
 </form>
-<!--<br>
-<a href="index.php?reseteaza">Reseteaza cautarea</a>
-<br>-->
+<br>
+<a href="index.php?page=1&reset=yes">Reseteaza cautarea</a>
+<br>
 <br>
 <?php
-//if (isset($_GET['reseteaza'])) {
-//    setcookie('keyword', '', time()-1);
-//    header('location: index.php?page=1');
-//}
+if (isset($_GET['reset'])) {
+    $reset = $_GET['reset'];
+    if ($reset == 'yes') {
+        setcookie('keyword', '', time()-1, '/');
+        header('location: index.php?page=1');
+    }
+    
+}
 
 if (isset($_GET['cauta'])) {
     $keyword = $_GET['kw'];
