@@ -23,7 +23,7 @@ function clearData($input, $link)
     return $input;
 }
 
-function adaugareCarte($titlu, $autor, $editura, $isbn, $gen) 
+function adaugareCarte($titlu, $autor, $editura, $isbn, $gen, $imagine) 
 {
     $link = conectareBD();
     $titlu = clearData($titlu, $link);
@@ -43,7 +43,7 @@ function adaugareCarte($titlu, $autor, $editura, $isbn, $gen)
     if ($carte) {
         return ['error' => true, 'message' => 'Cartea deja exista!'];
     }
-    $query = "INSERT INTO carte VALUES(NULL, '$titlu','$autor','$editura','$isbn','$gen')";
+    $query = "INSERT INTO carte VALUES(NULL, '$titlu','$autor','$editura','$isbn','$gen', '$imagine')";
     $rez = mysqli_query($link, $query);
     
 
@@ -54,7 +54,7 @@ function adaugareCarte($titlu, $autor, $editura, $isbn, $gen)
     }
 }
 
-function afisareCarte()
+function afisareCarti()
 {
     $link = conectareBD();
     $query = "SELECT * FROM carte";
@@ -62,4 +62,14 @@ function afisareCarte()
     $carti = mysqli_fetch_all($result, MYSQLI_ASSOC);
     return $carti;
     
+}
+
+function preiaCartiDupaKeyword($keyword)
+{
+    $link = conectareBD();
+    $keyword = clearData($keyword, $link);
+    $query = "SELECT * FROM carte WHERE titlu LIKE '%$keyword%'";
+    $rezultat = mysqli_query($link, $query);
+    $carti = mysqli_fetch_all($rezultat, MYSQLI_ASSOC);
+    return $carti;
 }

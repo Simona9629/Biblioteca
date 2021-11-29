@@ -7,7 +7,11 @@ CREATE TABLE carte(
     autor VARCHAR(100) NOT NULL,
     editura VARCHAR(100) NOT NULL,
     isbn CHAR(5) NOT NULL,
-    gen ENUM('Clasici', 'SF', 'Thriller','Poezie','Istorie')
+    gen ENUM('Clasici', 'SF', 'Thriller','Poezie','Istorie'),
+    imagine TEXT
 );
+SELECT * FROM carte;
 
 DROP DATABASE biblioteca;
+
+TRUNCATE carte;
